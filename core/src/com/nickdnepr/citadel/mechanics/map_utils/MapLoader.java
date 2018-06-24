@@ -26,6 +26,7 @@ public class MapLoader {
         map.addItems(new MapItem(BasicItem.ITEM_GROUND, 14, 0));
         map.addItems(new MapItem(BasicItem.ITEM_GROUND, 15, 1));
         map.addItems(new MapItem(BasicItem.ITEM_GROUND, 16, 1));
+        map.addItems(new MapItem(BasicItem.ITEM_WOODEN_BOX, 16, 2));
         map.addItems(new MapItem(BasicItem.ITEM_MAIN_HERO, 2, 7));
         return map;
     }

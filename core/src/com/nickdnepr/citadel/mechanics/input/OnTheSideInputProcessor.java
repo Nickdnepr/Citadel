@@ -4,6 +4,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.nickdnepr.citadel.mechanics.factories.BasicItemDef;
 import com.nickdnepr.citadel.mechanics.items.BasicItem;
 import com.nickdnepr.citadel.screens.gameplay_screens.TestGameplayScreen;
 
@@ -26,15 +27,14 @@ public class OnTheSideInputProcessor implements InputProcessor {
                 break;
             }
             case Input.Keys.A: {
-//                actor.getBody().setLinearVelocity(-2, actor.getBody().linVelLoc.y);
                 actor.startMoving(new Vector2(-2, 0));
                 break;
             }
             case Input.Keys.D: {
-//                actor.getBody().setLinearVelocity(2, actor.getBody().linVelLoc.y);
                 actor.startMoving(new Vector2(2, 0));
                 break;
             }
+
         }
         return false;
     }
@@ -52,6 +52,7 @@ public class OnTheSideInputProcessor implements InputProcessor {
         return false;
     }
 
+
     @Override
     public boolean keyTyped(char character) {
         return false;
@@ -59,6 +60,23 @@ public class OnTheSideInputProcessor implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+
+        Vector3 vector3 = screen.getCamera().unproject(new Vector3(screenX, screenY, 0));
+//        System.out.println(vector3.x + " " + vector3.y);
+        Vector2 vector2 = new Vector2(Math.round(vector3.x), Math.round(vector3.y));
+
+        switch (button) {
+            case Input.Buttons.LEFT: {
+                System.out.println("Left");
+                screen.addItemsToMap(new BasicItemDef(BasicItem.ITEM_WOODEN_BOX, vector2));
+                break;
+            }
+            case Input.Buttons.RIGHT: {
+                System.out.println("Right");
+                screen.removeItemsFromMap(vector2);
+                break;
+            }
+        }
         System.out.println("Clicked");
         return false;
     }
@@ -78,7 +96,7 @@ public class OnTheSideInputProcessor implements InputProcessor {
         Vector3 vector3 = screen.getCamera().unproject(new Vector3(screenX, screenY, 0));
 //        System.out.println(vector3.x + " " + vector3.y);
         Vector2 vector2 = new Vector2(Math.round(vector3.x), Math.round(vector3.y));
-        if (screen.getGameMap().containsKey(vector2)){
+        if (screen.getGameMap().containsKey(vector2)) {
             System.out.println("is here");
         }
 

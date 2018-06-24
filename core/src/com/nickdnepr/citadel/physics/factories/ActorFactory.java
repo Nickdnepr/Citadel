@@ -5,7 +5,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.World;
 import com.nickdnepr.citadel.mechanics.items.BasicItem;
 
-@Deprecated
+
 public class ActorFactory {
 
 
@@ -19,13 +19,13 @@ public class ActorFactory {
             }
 
             case BasicItem.ITEM_MAIN_HERO: {
-                body = BodyFactory.createBoxBody(world, x, y, 1, 1, BodyDef.BodyType.DynamicBody);
+                body = BodyFactory.createBoxBody(world, x, y, 0.95f, 0.95f, BodyDef.BodyType.DynamicBody);
 //                body = BodyFactory.createRoundedBoxBody(world,x,y,1,1,0.2f, BodyDef.BodyType.DynamicBody);
                 return new BasicItem(id, body);
             }
 
             default: {
-                body = BodyFactory.createBoxBody(world, x, y, 1, 1, BodyDef.BodyType.DynamicBody);
+                body = BodyFactory.createRoundedBoxBody(world, x, y, 1, 1, 0.02f, BodyDef.BodyType.StaticBody);
                 return new BasicItem(id, body);
             }
         }

@@ -12,31 +12,34 @@ public class BasicItem extends Actor {
 
     public static final int ITEM_GROUND = 0;
     public static final int ITEM_MAIN_HERO = 1;
+    public static final int ITEM_WOODEN_BOX = 2;
 
-    protected final int id;
+    protected int type;
     protected Body body;
     protected Sprite sprite;
     protected Vector2 movingDirectionForce;
     protected boolean isMoving;
+    protected long id;
 
 
-    public BasicItem(int id, Body body) {
-        this.id = id;
+    public BasicItem(int type, Body body) {
+        this.type = type;
         this.body = body;
         body.setFixedRotation(true);
         initSprite();
         movingDirectionForce = new Vector2(0, 0);
         isMoving = false;
+        id = System.currentTimeMillis();
     }
 
-    public int getId() {
-        return id;
+    public int getType() {
+        return type;
     }
 
     protected void initSprite() {
         Texture texture;
 
-        switch (id) {
+        switch (type) {
             case ITEM_GROUND: {
                 texture = new Texture("ground.jpeg");
                 sprite = new Sprite(texture);
@@ -45,6 +48,12 @@ public class BasicItem extends Actor {
             }
             case ITEM_MAIN_HERO: {
                 texture = new Texture("person.jpeg");
+                sprite = new Sprite(texture);
+                sprite.setSize(1, 1);
+                break;
+            }
+            case ITEM_WOODEN_BOX:{
+                texture = new Texture("box.jpg");
                 sprite = new Sprite(texture);
                 sprite.setSize(1, 1);
                 break;
@@ -84,7 +93,7 @@ public class BasicItem extends Actor {
         return body;
     }
 
-    public void  startMoving(Vector2 movingDirectionForce) {
+    public void startMoving(Vector2 movingDirectionForce) {
         this.movingDirectionForce = movingDirectionForce;
         isMoving = true;
     }
