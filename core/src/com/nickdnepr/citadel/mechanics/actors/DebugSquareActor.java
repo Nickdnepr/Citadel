@@ -1,4 +1,4 @@
-package com.nickdnepr.citadel.actors;
+package com.nickdnepr.citadel.mechanics.actors;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;

@@ -1,0 +1,54 @@
+package com.nickdnepr.citadel.mechanics.actors;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import java.util.Random;
+
+public class DebugPhysicsSquareActor extends Actor {
+    private Sprite sprite;
+    private Body body;
+
+    public DebugPhysicsSquareActor(final Body body) {
+        this.body = body;
+        setBounds(body.getPosition().x, body.getPosition().y, 100, 100);
+        sprite = new Sprite(new Texture("badlogic.jpg"));
+        sprite.setBounds(getX(), getY(), 1, 1);
+        sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
+        setOrigin(getWidth() / 2, getHeight() / 2);
+        final Random random = new Random();
+        addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+//                body.applyLinearImpulse(random.nextInt(500000), random.nextInt(500000), 0, 0, true);
+//                body.applyLinearImpulse(0, 500000, getX()+50, getY()+50, true);
+                body.setLinearVelocity(100,100);
+                System.out.println("clicked");
+            }
+        });
+    }
+
+    @Override
+    public void draw(Batch batch, float parentAlpha) {
+        sprite.draw(batch);
+    }
+
+    @Override
+    public void act(float delta) {
+        setPosition(body.getPosition().x - 0.5f, body.getPosition().y - 0.5f);
+        setRotation((float) ((360.0f * body.getAngle()) / (2 * Math.PI)));
+        sprite.setPosition(getX(), getY());
+        sprite.setRotation(getRotation());
+
+    }
+
+    public Body getBody() {
+        return body;
+    }
+}

@@ -1,11 +1,9 @@
 package com.nickdnepr.citadel.screens.menu_screens;
 
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.Gdx;
 import com.nickdnepr.citadel.CitadelGame;
-import com.nickdnepr.citadel.actors.DebugSquareActor;
+import com.nickdnepr.citadel.mechanics.actors.DebugSquareActor;
+import com.nickdnepr.citadel.screens.gameplay_screens.TestGameplayScreen;
 
 public class StartupScreen extends AbstractMenuScreen {
 
@@ -17,12 +15,7 @@ public class StartupScreen extends AbstractMenuScreen {
     public void show() {
         super.show();
         DebugSquareActor actor = new DebugSquareActor();
-        //actor.addAction(Actions.fadeIn(10));
         stage.addActor(actor);
-        stage.getBatch().begin();
-        stage.getBatch().draw(new Texture("badlogic.jpg"), 1, 1);
-        stage.getBatch().end();
-
     }
 
     @Override
@@ -34,6 +27,9 @@ public class StartupScreen extends AbstractMenuScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
+        if (Gdx.input.isTouched()) {
+            game.setScreen(new TestGameplayScreen(game));
+        }
     }
 
     @Override
@@ -58,6 +54,6 @@ public class StartupScreen extends AbstractMenuScreen {
 
     @Override
     public void dispose() {
-
+        super.dispose();
     }
 }

@@ -30,7 +30,7 @@ public abstract class AbstractScreen implements Screen {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         camera.update();
-        stage.act(delta);
+        stage.act();
         stage.draw();
     }
 
@@ -49,5 +49,12 @@ public abstract class AbstractScreen implements Screen {
         stage = new Stage(new FitViewport(camera.viewportWidth, camera.viewportHeight, camera));
     }
 
+    @Override
+    public void dispose() {
+        stage.dispose();
+    }
 
+    public OrthographicCamera getCamera() {
+        return camera;
+    }
 }
