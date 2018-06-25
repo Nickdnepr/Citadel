@@ -20,7 +20,7 @@ public class OnTheSideInputProcessor implements InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-        System.out.println("KeyDown " + keycode);
+//        System.out.println("KeyDown " + keycode);
         switch (keycode) {
             case Input.Keys.SPACE: {
                 actor.getBody().applyLinearImpulse(new Vector2(0, 1f), new Vector2(actor.getBody().getPosition()), true);
@@ -67,17 +67,17 @@ public class OnTheSideInputProcessor implements InputProcessor {
 
         switch (button) {
             case Input.Buttons.LEFT: {
-                System.out.println("Left");
+//                System.out.println("Left");
                 screen.addItemsToMap(new BasicItemDef(BasicItem.ITEM_WOODEN_BOX, vector2));
                 break;
             }
             case Input.Buttons.RIGHT: {
-                System.out.println("Right");
+//                System.out.println("Right");
                 screen.removeItemsFromMap(vector2);
                 break;
             }
         }
-        System.out.println("Clicked");
+//        System.out.println("Clicked");
         return false;
     }
 
@@ -97,7 +97,7 @@ public class OnTheSideInputProcessor implements InputProcessor {
 //        System.out.println(vector3.x + " " + vector3.y);
         Vector2 vector2 = new Vector2(Math.round(vector3.x), Math.round(vector3.y));
         if (screen.getGameMap().containsKey(vector2)) {
-            System.out.println("is here");
+//            System.out.println("is here");
         }
 
         return false;

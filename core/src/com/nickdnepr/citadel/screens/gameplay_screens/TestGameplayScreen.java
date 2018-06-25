@@ -76,11 +76,13 @@ public class TestGameplayScreen extends AbstractGameplayScreen {
 
     @Override
     protected void cleanMap() {
+        System.out.println("started cleaning");
         for (Body body : garbage) {
             world.destroyBody(body);
         }
         needCleaning = false;
         garbage.clear();
+        System.out.println(gameMap.size());
     }
 
 
@@ -90,6 +92,7 @@ public class TestGameplayScreen extends AbstractGameplayScreen {
             BasicItem item = ItemFactory.createBasicItem(itemDef, world);
             System.out.println("adding");
             gameMap.put(item.getBody().getPosition(), item);
+            System.out.println(gameMap.size());
             stage.addActor(item);
         }
     }
@@ -98,11 +101,12 @@ public class TestGameplayScreen extends AbstractGameplayScreen {
     public void removeItemsFromMap(Vector2... positions) {
         for (Vector2 vector2 : positions) {
             BasicItem item = gameMap.get(vector2);
-            if (item==null){
+            if (item == null) {
                 continue;
             }
             stage.getActors().removeValue(item, false);
             garbage.add(item.getBody());
+            gameMap.remove(item.getBody().getPosition());
             needCleaning = true;
         }
     }
