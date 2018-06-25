@@ -89,6 +89,9 @@ public class TestGameplayScreen extends AbstractGameplayScreen {
     @Override
     public void addItemsToMap(BasicItemDef... items) {
         for (BasicItemDef itemDef : items) {
+            if (gameMap.containsKey(itemDef.getPosition())) {
+                continue;
+            }
             BasicItem item = ItemFactory.createBasicItem(itemDef, world);
             System.out.println("adding");
             gameMap.put(item.getBody().getPosition(), item);
